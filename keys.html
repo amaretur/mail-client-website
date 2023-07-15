@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ключи шифрования</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'>
+
+	<link rel="stylesheet" href="http://localhost:8000/css/minireset_min.css">
+	<link rel="stylesheet" href="http://localhost:8000/css/keys.css">
+</head>
+<body>
+
+	<div class="error">
+		<p>Ошибка! 😱</p>
+		<p class="text"></p>
+	</div>
+
+	<div class="warning">
+		<div class="form">
+			<h2><span>В</span>нимание!</h2>
+			<p class="text"></p>
+			<div class="btn-block">
+				<div class="ok">ПОДТВЕРДИТЬ</div>
+				<div onclick="document.querySelector('.warning').classList.remove('show');" class="cancel">ОТМЕНА</div>
+			</div>
+		</div>
+	</div>
+
+	<header>
+		<div onclick="" class="logo"><span>П</span>очта</div>
+		<div class="account">
+			<p class="account-logo"></p>
+		</div>
+	</header>
+
+	<main>
+		<h2>Ключи для создания элекронно-цифровой подписи:</h2>
+		<div class="my-verify">
+			<p class="key verify-pub"></p>
+			<p class="key verify-priv"></p>
+		</div>
+		<div onclick="show_warning('Обновление ключей ЭЦП приведет к тому, что Ваши собеседники не смогут верифицировать Ваши письма, пока вы не отправите им новые ключи! Обновляйте ключи только тогда, когда знаете что делаете!', update_verify, null);" class="btn-refresh-verify">ОБНОВИТЬ КЛЮЧИ</div>
+		<h2>Ключи диалогов:</h2>
+		<div class="dialog-list">
+			<div class="dialog">
+				<p>Собеседник:</p>
+				<p class="mail">dmitry.rannev24@gmail.com</p>
+			</div>
+		</div>
+
+	<div class="dialog-key-form">
+		<div class="form">
+		<h2>Ключи диалога:</h2>
+		<div class="my-verify interlocutor-keys">
+			<p class="key encrypt"></p>
+			<p class="key verify"></p>
+		</div>
+		<div class="my-verify">
+			<p class="key shared"></p>
+			<p class="key decrypt"></p>
+		</div>
+		<div onclick="document.querySelector('.dialog-key-form').classList.remove('show');" class="cancel">ЗАКРЫТЬ</div>
+		</div>
+	</div>
+
+	</main>
+	<script src="http://localhost:8000/js/core.js"></script>
+	<script src="http://localhost:8000/js/keys.js"></script>
+
+</body>
+</html>

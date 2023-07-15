@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Авторизация</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'>
+
+	<link rel="stylesheet" href="http://localhost:8000/css/minireset_min.css">
+	<link rel="stylesheet" href="http://localhost:8000/css/auth.css">
+</head>
+<body>
+
+	<div class="warning">
+		<div class="form">
+			<h2><span>В</span>нимание!</h2>
+			<p class="text"></p>
+			<div class="btn-block">
+				<div class="ok">ПОДТВЕРДИТЬ</div>
+				<div onclick="document.querySelector('.warning').classList.remove('show');" class="cancel">ОТМЕНА</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="error">
+		<p>Ошибка! 😱</p>
+		<p class="text"></p>
+	</div>
+
+	<main>
+		<div class="form">
+			<h2><span>У</span>четные записи</h2>
+			<p class="form-info">Выберете учетную запись для продолжения...</p>
+			<div class="account-list">
+				<div class="plug-empty">Вы не добавили ни одной учетной записи 🤷‍♂️</div>
+			</div>
+			<div onclick="document.querySelector('.add-new-account-form').classList.add('show');" class="add-new-account">ДОБАВИТЬ УЧЕТНУЮ ЗАПИСЬ</div>
+		</div>
+	</main>
+
+	<div class="add-new-account-form">
+		<div class="form">
+			<h2><span>Д</span>обавление учетной записи</h2>
+			<input id="username" type="text" placeholder="Почтовый адрес...">
+			<input id="password" type="password" placeholder="Пароль...">
+			<h3>Настройки клиента:</h3>
+			<div class="setting">
+				<div class="imap">
+					<input id="imap_host" type="text" placeholder="IMAP сервер...">
+					<input id="imap_port" onkeypress="only_number_validator(event);" type="text" placeholder="IMAP порт..">
+				</div>
+				<div class="smtp">
+					<input id="smtp_host" type="text" placeholder="SMTP сервер...">
+					<input id="smtp_port" onkeypress="only_number_validator(event);" type="text" placeholder="SMTP порт...">
+				</div>
+			</div>
+			<div class="btn-block">
+				<div onclick="add_new_account();" class="add-new-account">ДОБАВИТЬ УЧЕТНУЮ ЗАПИСЬ</div>
+				<div onclick="document.querySelector('.add-new-account-form').classList.remove('show');" class="cancel">ОТМЕНА</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="http://localhost:8000/js/core.js"></script>
+	<script src="http://localhost:8000/js/auth.js"></script>
+</body>
+</html>
+
+
+<!--				<div class="account">
+					<div class="account-body">
+						<p class="logo">L</p>
+						<p class="username">larri@gmail.com</p>
+					</div>
+					<div class="btn-delete-account"><img src="http://localhost:8000/icon/close-white.png" title="Удалить"></div>
+				</div>
+--!>
+
+<!-- <div class="plug-empty">Вы не добавили ни одной учетной записи 🤷‍♂️</div> --!> 
+
+
+

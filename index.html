@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Почтовый ящик</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'>
+
+	<link rel="stylesheet" href="http://localhost:8000/css/minireset_min.css">
+	<link rel="stylesheet" href="http://localhost:8000/css/style.css">
+</head>
+<body>
+
+	<div class="error">
+		<p>Ошибка! 😱</p>
+		<p class="text"></p>
+	</div>
+
+	<header>
+		<div class="logo"><span>П</span>очта</div>
+		<div class="account">
+			<p onclick="setting();" class="setting"><img src="http://localhost:8000/icon/preferences.png" title="Настройки"></p>
+			<p onclick="account_menu_toggle();" class="account-logo"></p>
+		</div>
+	</header>
+	<main>
+		<div class="menu">
+			<div class="folders">
+				<h2>Почтовые ящики:</h2>
+				<div class="folder-list">
+					<p class="load">Идет загрузка...</p>
+				</div>
+			</div>
+			<div class="btn-block">
+				<div  onclick="document.querySelector('.send-mail').classList.toggle('show');" class="btn-open-send-form">НАПИСАТЬ</div>
+				<div onclick="document.querySelector('.share-form').classList.add('show');" class="btn-open-share-form"><img src="http://localhost:8000/icon/key.png" title="Поделиться ключами"></div>
+			</div>
+		</div>
+
+		<div class="mail-list"><p class="plug-mail">Загрузка писем...</p></div>
+
+		<div class="pagin">
+			<div class="wrapper">
+				<p onclick="prev();" class="prev"><img src="https://img.icons8.com/ios-glyphs/452/double-left--v1.png" title="Предыдущая страница"></p>
+				<p class="page-num">Загрузка...</p>
+				<div onclick="next();" class="next"><img src="https://img.icons8.com/ios-glyphs/452/double-left--v1.png" title="Следующая страница"></div>
+			</div>
+		</div>
+	</main>
+
+	<div class="check-mail-form">
+		<div onclick="document.querySelector('.check-mail-form').classList.remove('show');" title="Закрыть"class="close-mail"><img src="http://localhost:8000/icon/close-black.png"></div>
+		<div class="form">
+			<div class="error-mail">
+				<p>Warrning! this mail with error!</p>
+			</div>
+			<h2 class="subject"></h2>
+			<div class="mail-header">
+				<div class="from">
+					<p class="from-name">Без имени</p>
+					<p class="from-mail"></p>
+				</div>
+				<p class="date-time"></p>
+			</div>
+			<p class="body"></p>
+
+			<div onclick="receive_key();" class="receive-key">Принять ключи шифрования</div>
+
+			<div class="attach"></div>
+
+		</div>
+	</div>
+
+	<div class="send-mail">
+		<div class="header">
+			<p>Новое письмо...</p>
+			<img class="close" onclick="document.querySelector('.send-mail').classList.toggle('show');" src="http://localhost:8000/icon/close-white.png" alt="">
+		</div>
+		<div class="main">
+			<input class="form_to" type="text" placeholder="Кому... (exemple1@gmail.com)">
+			<input class="form_subj" type="text" placeholder="Тема...">
+			<div id="editor"></div>
+		</div>
+		<div class="footer">
+			<div title="Подписать" onclick="document.querySelector('.send-mail .sign').classList.toggle('use');" class="sign">
+				<img src="http://localhost:8000/icon/sign.png">
+			</div>
+			<div title="Зашифровать" onclick="document.querySelector('.send-mail .enc').classList.toggle('use');" class="enc">
+				<img src="http://localhost:8000/icon/cipher.png">
+			</div>
+			
+			<div title="Очистить форму" class="reset" onclick="clear_send_form();">
+				<img src="http://localhost:8000/icon/reset.png" title="Очистить форму">
+			</div>
+			<input type="file" class="attach" onchange="put_file();" hidden>
+			<div title="Прикрепить файл" class="put-file" data-count="0" onclick="document.querySelector('input.attach').click();"><img src="http://localhost:8000/icon/clip.png" alt=""></div>
+			<div onclick="send_mail();" class="btn">ОТПРАВИТЬ</div>
+		</div>
+	</div>
+
+	<div class="info-form">
+		<p class="text">Письмо отправлено!</p>
+	</div>
+
+	<div class="share-form">
+		<div class="form">
+			<h2>Отправка ключей шифрования</h2>
+			<input type="text" placeholder="Адрес получателя...">
+			<div class="btn-block">
+				<div onclick="share();" class="ok">ОТПРАВИТЬ</div>
+				<div onclick="document.querySelector('.share-form').classList.remove('show');" class="cancel">ОТМЕНА</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="setting-form">
+		<p>IMAP хост:</p>
+		<input class="imap-host" type="text">
+		<p>IMAP порт:</p>
+		<input onkeypress="only_number_validator(event);" class="imap-port" type="text">
+		<p>SMTP хост:</p>
+		<input class="smtp-host" type="text">
+		<p>SMTP порт:</p>
+		<input onkeypress="only_number_validator(event);" class="smtp-port" type="text">
+		<div onclick="save_setting();" class="btn">СОХРАНИТЬ</div>
+	</div>
+
+	<div class="account-menu-form">
+		<div class="logo"></div>
+		<p class="mail"></p>
+		<div  onclick="window.open('http://localhost:8000/keys.html', '_blank');" class="btn key-list">
+			<img src="http://localhost:8000/icon/key.png">
+			Моя ключница
+		</div>
+		<div onclick="window.open('http://localhost:8000/auth.html', '_self');" class="change-account btn">
+			<img src="http://localhost:8000/icon/c-account.png">
+			Сменить аккаунт
+		</div>
+	</div>
+
+	<script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+
+	<script src="http://localhost:8000/js/core.js"></script>
+	<script src="http://localhost:8000/js/main.js"></script>
+
+</body>
+</html>
